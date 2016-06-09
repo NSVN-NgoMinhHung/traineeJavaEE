@@ -11,6 +11,8 @@
     <class>entity.Order</class>
     <class>entity.OrderDetail</class>
     <class>entity.ShoppingCart</class>
+    <class>entity.keywordSet</class>
+    <class>entity.ProductSet</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://1604-V0001\SQLEXPRESS;databaseName=FoodStoreDb"/>
       <property name="javax.persistence.jdbc.password" value="123456789"/>
