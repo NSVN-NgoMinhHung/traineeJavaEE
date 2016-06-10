@@ -4,5 +4,7 @@
             "context": "button"
         }
     },
-    "elements": {}
+    "elements": {
+        "div": {}
+    }
 }
