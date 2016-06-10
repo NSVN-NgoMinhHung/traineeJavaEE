@@ -18,8 +18,8 @@ function CartItem(product, quantity){
     self.p = ko.observable(product);
     self.quantity = ko.observable(quantity);
     self.total = ko.computed(function(){
-        var price = self.product.price;
-        return self.quantity() * price;
+        var price = self.p().price;
+        return self.quantity * price;
     });
 }
 
@@ -37,10 +37,14 @@ function IndexViewModel(){
         new Product(3,'test', 'test', 'test', 15, 'http://placehold.it/350x260')
     ]);
     self.lstCartItem = ko.observableArray([
-        new CartItem(self.featuredProducts1[0], 1),
-        new CartItem(self.featuredProducts2[2], 2), 
-        new CartItem(self.featuredProducts1[2], 3)
+        new CartItem(self.featuredProducts1()[0], 1),
+        new CartItem(self.featuredProducts2()[2], 2), 
+        new CartItem(self.featuredProducts1()[2], 3)
     ]);
+    self.countCartItems = ko.computed(function(){
+        var count = self.lstCartItem().length;
+        return count;
+    });
     self.subtotal = ko.computed(function(){
        var total = 0;
        for (var i = 0; i < self.lstCartItem.length; i++)
