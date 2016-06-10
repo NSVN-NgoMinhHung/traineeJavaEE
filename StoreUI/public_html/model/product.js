@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function Product(){
-    
+function Product(id, name, genre, description, price, imageFileName){
+    var self = this;
+    self.id = id;
+    self.name = name;
+    self.genre = genre;
+    self.description = description;
+    self.price = price;
+    self.imageFileName = imageFileName;
 }
-
