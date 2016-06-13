@@ -26,7 +26,6 @@ public class ShopDataAccess {
         Users u = new Users("a", "a");
         da.persist(u);
         Administrator a = new Administrator(u, "a", "a");
-
         da.persist(a);
     }
 
