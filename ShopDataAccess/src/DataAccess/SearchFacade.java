@@ -13,6 +13,9 @@ import java.util.List;
  * @author hungnm
  */
 public class SearchFacade {
+    public List<Product> getAllProducts(){
+        return null;
+    }
     public List<Product> getProductsByName(String name){
         return null;
     }

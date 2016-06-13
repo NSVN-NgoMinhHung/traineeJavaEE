@@ -55,10 +55,11 @@
                                                 <span data-bind="text: p().name"></span>
                                                 <span data-bind="text: 'Unit cost: '+p().price+'$'"></span>
                                                 <span data-bind="text: 'Quantity: '+quantity()"></span>
+                                                <span data-bind="text: 'Total: '+total()+'$'"></span>
                                             </span>
                                         </span>
                                         <span class="item-right">
-                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                            <button data-bind="click: $root.removeCart" class="btn btn-xs btn-danger pull-right">x</button>
                                         </span>
                                     </span>
                                 </li>
@@ -92,7 +93,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="contain">Author</label>
+                                                <label for="contain">Brand</label>
                                                 <input class="form-control" type="text" />
                                             </div>
                                             <div class="form-group">
@@ -140,17 +141,12 @@
                                                     <h5 data-bind="text: name"></h5>
                                                     <h5 data-bind="text: '$'+price" class="price-text-color"></h5>
                                                 </div>
-                                                <div class="rating hidden-sm col-md-6">
-                                                    <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="fa fa-star"></i>
-                                                </div>
                                             </div>
                                             <div class="separator clear-left">
                                                 <p class="btn-add">
-                                                    <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
+                                                    <i class="fa fa-shopping-cart"></i><a href="#" data-bind="click: $root.addToCart" class="hidden-sm">Add to cart</a></p>
                                                 <p class="btn-details">
-                                                    <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                                    <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
                                             </div>
                                             <div class="clearfix">
                                             </div>

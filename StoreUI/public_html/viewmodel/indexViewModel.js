@@ -19,22 +19,30 @@ function CartItem(product, quantity){
     self.quantity = ko.observable(quantity);
     self.total = ko.computed(function(){
         var price = self.p().price;
-        return self.quantity * price;
+        return self.quantity() * price;
     });
 }
 
 
 function IndexViewModel(){
     var self = this;
+    self.lstProduct = ko.observableArray([
+        new Product(1,'test1', 'test1', 'test1', 10, 'http://placehold.it/350x260'),
+        new Product(2,'test2', 'test2', 'test2', 11, 'http://placehold.it/350x260'),
+        new Product(3,'test3', 'test3', 'test3', 12, 'http://placehold.it/350x260'),
+        new Product(4,'test4', 'test4', 'test4', 13, 'http://placehold.it/350x260'),
+        new Product(5,'test5', 'test5', 'test5', 14, 'http://placehold.it/350x260'),
+        new Product(6,'test6', 'test6', 'test6', 15, 'http://placehold.it/350x260')
+    ]);
     self.featuredProducts1 = ko.observableArray([
-        new Product(1,'test', 'test', 'test', 10, 'http://placehold.it/350x260'),
-        new Product(2,'test', 'test', 'test', 11, 'http://placehold.it/350x260'),
-        new Product(3,'test', 'test', 'test', 12, 'http://placehold.it/350x260')
+        self.lstProduct()[0],
+        self.lstProduct()[1],
+        self.lstProduct()[2]
     ]);
     self.featuredProducts2 = ko.observableArray([
-        new Product(1,'test', 'test', 'test', 13, 'http://placehold.it/350x260'),
-        new Product(2,'test', 'test', 'test', 14, 'http://placehold.it/350x260'),
-        new Product(3,'test', 'test', 'test', 15, 'http://placehold.it/350x260')
+        self.lstProduct()[3],
+        self.lstProduct()[4],
+        self.lstProduct()[5]
     ]);
     self.lstCartItem = ko.observableArray([
         new CartItem(self.featuredProducts1()[0], 1),
@@ -45,11 +53,24 @@ function IndexViewModel(){
         var count = self.lstCartItem().length;
         return count;
     });
-    self.subtotal = ko.computed(function(){
+    
+    self.lstProductSearchResult = ko.observableArray([
+        
+    ]);
+    self.countProductSearchResult = ko.computed(function(){
+        return self.lstProductSearchResult().length;
+    });
+    self.totalAll = ko.computed(function(){
        var total = 0;
        for (var i = 0; i < self.lstCartItem.length; i++)
            total += self.lstCartItem[i].cartItem().total;
        return total;
     });
+    self.addToCart = function(product){
+        self.lstCartItem.push(new CartItem(product, 1));
+    };
+    self.removeCart = function(cartitem){
+        self.lstCartItem.remove(cartitem);
+    }
 }
 ko.applyBindings(new IndexViewModel());
