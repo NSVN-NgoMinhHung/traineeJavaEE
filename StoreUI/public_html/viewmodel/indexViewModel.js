@@ -33,6 +33,7 @@ function CartItem(product, quantity) {
 function IndexViewModel() {
     var self = this;
     self.lstProduct = ko.observableArray();
+    self.searchProductName = ko.observable();
 
     $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getListProducts").
             then(function (getListProducts) {
