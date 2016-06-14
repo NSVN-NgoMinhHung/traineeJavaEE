@@ -27,7 +27,14 @@ public class SearchFacade {
         return result;
     }
     public List<Product> getProductsByName(String name){
-        return null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ShopDataAccessPU");
+        EntityManager enManager = emFactory.createEntityManager();
+        Query query = enManager.createNamedQuery("Product.findByName", String.class);
+        query.setParameter("productName", name);
+        List<Product> result = query.getResultList();
+        enManager.close();
+        emFactory.close();
+        return result;
     }
     public List<Product> getProductsByKeyword(String keyword){
         return null;
