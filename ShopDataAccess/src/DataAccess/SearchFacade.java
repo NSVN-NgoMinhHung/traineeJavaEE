@@ -7,6 +7,10 @@ package DataAccess;
 
 import entity.Product;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,7 +18,13 @@ import java.util.List;
  */
 public class SearchFacade {
     public List<Product> getAllProducts(){
-        return null;
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ShopDataAccessPU");
+        EntityManager enManager = emFactory.createEntityManager();
+        Query query = enManager.createNamedQuery("Product.findAll");
+        List<Product> result = query.getResultList();
+        enManager.close();
+        emFactory.close();
+        return result;
     }
     public List<Product> getProductsByName(String name){
         return null;

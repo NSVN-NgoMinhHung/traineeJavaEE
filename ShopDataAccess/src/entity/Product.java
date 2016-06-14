@@ -11,16 +11,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author hungnm
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Product.findAll", query = "SELECT c FROM Product c"),
+    @NamedQuery(name = "Product.findById", query = "SELECT c FROM Product c WHERE c.id = :id"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT c FROM Product c WHERE c.productName = :productName"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT c FROM Product c WHERE c.description = :description"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT c FROM Product c WHERE c.price = :price")
+    })
 public class Product implements Serializable {
-   
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -31,12 +40,9 @@ public class Product implements Serializable {
     private float price;
     private String imageFileName;
 
-   
     public Long getId() {
         return id;
     }
-    
-    
 
     public void setId(Long id) {
         this.id = id;
@@ -81,21 +87,17 @@ public class Product implements Serializable {
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
     }
-    
-    
 
     public Product() {
     }
 
-    public Product(Long id, String productName, Genre genre, String description, float price, String imageFileName) {
-        this.id = id;
+    public Product( String productName, Genre genre, String description, float price, String imageFileName) {
         this.productName = productName;
         this.genre = genre;
         this.description = description;
         this.price = price;
         this.imageFileName = imageFileName;
     }
-    
 
     @Override
     public int hashCode() {
@@ -121,5 +123,5 @@ public class Product implements Serializable {
     public String toString() {
         return "entity.Product[ id=" + id + " ]";
     }
-    
+
 }

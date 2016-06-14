@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/DataAccess/DataFacade.java</file>
-            <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/shopdataaccess/ShopDataAccess.java</file>
             <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/DataAccess/SearchFacade.java</file>
-            <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/entity/Administrator.java</file>
+            <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/shopdataaccess/ShopDataAccess.java</file>
+            <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/entity/Product.java</file>
             <file>file:/C:/Users/hungnm/Documents/traineeJavaEE/ShopDataAccess/src/META-INF/persistence.xml</file>
         </group>
     </open-files>

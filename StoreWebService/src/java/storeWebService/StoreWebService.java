@@ -9,6 +9,7 @@ import DataAccess.SearchFacade;
 import com.google.gson.Gson;
 import entity.Product;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -23,6 +24,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author hungnm
  */
+@Stateless
 @Path("storeWebService")
 public class StoreWebService {
     
