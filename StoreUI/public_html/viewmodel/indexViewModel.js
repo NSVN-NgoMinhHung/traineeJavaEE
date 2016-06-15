@@ -34,6 +34,7 @@ function IndexViewModel() {
     var self = this;
     self.lstProduct = ko.observableArray();
     self.searchProductName = ko.observable();
+    self.searchResult = ko.observableArray();
 
     $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getListProducts").
             then(function (getListProducts) {
@@ -49,12 +50,7 @@ function IndexViewModel() {
         var count = self.lstCartItem().length;
         return count;
     });
-
-    self.lstProductSearchResult = ko.observableArray([
-    ]);
-    self.countProductSearchResult = ko.computed(function () {
-        return self.lstProductSearchResult().length;
-    });
+    
     self.totalAll = ko.computed(function () {
         var total = 0;
         for (var i = 0; i < self.lstCartItem.length; i++)
@@ -66,6 +62,18 @@ function IndexViewModel() {
     };
     self.removeCart = function (cartitem) {
         self.lstCartItem.remove(cartitem);
+    };
+    
+    self.getResults = function(){
+        self.searchResult.destroyAll();
+        $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getProducts/"+self.searchProductName()).
+            then(function (getProducts) {
+                $.each(getProducts, function () {
+                    self.searchResult.push(
+                            new Product(this.id, this.productName, this.genre, this.description, this.price, this.imageFileName)
+                            );
+                });
+            });
     };
 }
 ko.applyBindings(new IndexViewModel());

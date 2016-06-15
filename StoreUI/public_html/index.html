@@ -70,47 +70,47 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="input-group" id="adv-search">
-                        <input type="text" data-bind="value: searchProductName" class="form-control" placeholder="Search for product name" />
-                        <div class="input-group-btn">
-                            <div class="btn-group" role="group">
-                                <div class="dropdown dropdown-lg">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <form class="form-horizontal" role="form">
-                                            <div class="form-group">
-                                                <label for="filter">Filter by</label>
-                                                <select class="form-control">
-                                                    <option value="0" selected>All Snippets</option>
-                                                    <option value="1">Featured</option>
-                                                    <option value="2">Most popular</option>
-                                                    <option value="3">Top rated</option>
-                                                    <option value="4">Most commented</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="contain">Brand</label>
-                                                <input class="form-control" type="text" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="contain">Contains the words</label>
-                                                <input class="form-control" type="text" />
-                                            </div>
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                        </form>
-                                    </div>
+        <div style="margin-top:50px" class="navbar-fixed-top">
+            <div class="col-md-12">
+                <div class="input-group" id="adv-search">
+                    <input type="text" data-bind="value: searchProductName" class="form-control" placeholder="Search for product name" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="filter">Filter by</label>
+                                            <select class="form-control">
+                                                <option value="0" selected>All Snippets</option>
+                                                <option value="1">Featured</option>
+                                                <option value="2">Most popular</option>
+                                                <option value="3">Top rated</option>
+                                                <option value="4">Most commented</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Brand</label>
+                                            <input class="form-control" type="text" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Contains the words</label>
+                                            <input class="form-control" type="text" />
+                                        </div>
+                                        <button type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
                                 </div>
-                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
+                            <button type="button" data-bind="click: getResults()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+        </div>
+
+        <div class="container">
+            <div data-bind="visible: searchResult().length <=0" class="row">
                 <div class="row">
                     <div class="col-md-9">
                         <h3>
@@ -192,13 +192,58 @@
                     </div>
                 </div>
             </div>
+            <div data-bind="visible: searchResult().length > 0"  class="row">
+                <div class="well well-sm">
+                    <strong>Search result:</strong>
+                    <div class="btn-group">
+                        <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+                            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                                class="glyphicon glyphicon-th"></span>Grid</a>
+                    </div>
+                </div>
+                <div id="products" data-bind="foreach: searchResult()" class="row list-group">
+                    <div class="item col-sm-4">
+                        <div class="col-item">
+                            <div class="photo">
+                                <img data-bind="attr: {src: imageFileName}" class="img-responsive" alt="a" />
+                            </div>
+                            <div class="info">
+                                <div class="row">
+                                    <div class="price col-md-6">
+                                        <h5 data-bind="text: productName">
+                                            Product with Variants</h5>
+                                        <h5 data-bind="text: '$'+price" class="price-text-color"></h5>
+                                    </div>
+                                    <div class="rating hidden-sm col-md-6">
+                                        <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                        </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                        </i><i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="separator clear-left">
+                                    <p class="btn-add">
+                                        <i class="fa fa-shopping-cart"></i><a href="#" data-bind="click: $root.addToCart" class="hidden-sm">Add to cart</a></p>
+                                    <p class="btn-details">
+                                        <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <hr>
 
             <footer>
                 <p>&copy; Company 2015</p>
             </footer>
-        </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+        </div> <!-- /container -->
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
@@ -215,8 +260,8 @@
             var liViewCart = document.createElement('li');
             var aViewCart = document.createElement('a');
             aViewCart.className = "text-center";
-            aViewCart.innerHTML ="View Card";
-            aViewCart.href ="#";
+            aViewCart.innerHTML = "View Card";
+            aViewCart.href = "#";
             liViewCart.appendChild(aViewCart);
             ulShoppingCart.appendChild(liDivider);
             ulShoppingCart.appendChild(liViewCart);
@@ -225,18 +270,18 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-                    (function (b, o, i, l, e, r) {
-                        b.GoogleAnalyticsObject = l;
-                        b[l] || (b[l] =
-                                function () {
-                                    (b[l].q = b[l].q || []).push(arguments)
-                                });
-                        b[l].l = +new Date;
-                        e = o.createElement(i);
-                        r = o.getElementsByTagName(i)[0];
-                        e.src = '//www.google-analytics.com/analytics.js';
-                        r.parentNode.insertBefore(e, r)
-                    }(window, document, 'script', 'ga'));
+            (function (b, o, i, l, e, r) {
+                b.GoogleAnalyticsObject = l;
+                b[l] || (b[l] =
+                        function () {
+                            (b[l].q = b[l].q || []).push(arguments)
+                        });
+                b[l].l = +new Date;
+                e = o.createElement(i);
+                r = o.getElementsByTagName(i)[0];
+                e.src = '//www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e, r)
+            }(window, document, 'script', 'ga'));
             ga('create', 'UA-XXXXX-X', 'auto');
             ga('send', 'pageview');
         </script>
