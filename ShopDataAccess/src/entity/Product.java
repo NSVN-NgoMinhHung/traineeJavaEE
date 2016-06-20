@@ -24,7 +24,8 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Product.findById", query = "SELECT c FROM Product c WHERE c.id = :id"),
     @NamedQuery(name = "Product.findByName", query = "SELECT c FROM Product c WHERE c.productName like :productName"),
     @NamedQuery(name = "Product.findByDescription", query = "SELECT c FROM Product c WHERE c.description = :description"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT c FROM Product c WHERE c.price = :price")
+    @NamedQuery(name = "Product.findByGenre", query = "SELECT c FROM Product c WHERE c.genre = :genre"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT c FROM Product c WHERE c.price <= :maxprice and c.price >= :minprice")
     })
 public class Product implements Serializable {
 

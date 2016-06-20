@@ -61,12 +61,45 @@ public class StoreWebService {
     }
     
     @GET
-    @Path("/getProducts/{productName}")
+    @Path("/getProductsByName/{productName}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getProductsByName(@PathParam("productName") String productName) {
         Gson gson = new Gson();
         List<Product> results;
         results = sf.getProductsByName(productName);
+        return gson.toJson(results);
+    }
+    
+    @GET
+    @Path("/getProductsById/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getProductsByName(@PathParam("id") int id) {
+        Gson gson = new Gson();
+        List<Product> results;
+        results = sf.getProductsById(id);
+        return gson.toJson(results);
+    }
+    
+    @GET
+    @Path("/getProductsByGenre/{genreId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getProductsByGenre(@PathParam("genreId") Long genreId) {
+        Gson gson = new Gson();
+        List<Product> results;
+        results = sf.getProductsByGenre(genreId);
+        return gson.toJson(results);
+    }
+    
+    @GET
+    @Path("/getProductsByPrice/{price}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getProductsByPrice(@PathParam("price") String field) {
+        Gson gson = new Gson();
+        List<Product> results;
+        String[] s = field.split(",");
+        float min = Float.parseFloat(s[0]);
+        float max = Float.parseFloat(s[1]);
+        results = sf.getProductsByPrice(min, max);
         return gson.toJson(results);
     }
 
