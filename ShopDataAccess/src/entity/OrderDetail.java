@@ -21,7 +21,7 @@ public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @OneToOne
-    private Order order;
+    private Order o;
     @Id
     @ManyToOne   
     private Product product;
@@ -30,15 +30,15 @@ public class OrderDetail implements Serializable {
     private float subTotal;
 
     public Order getId() {
-        return order;
+        return o;
     }
 
     public void setId(Order id) {
-        this.order = id;
+        this.o = id;
     }
 
     public Order getOrder() {
-        return order;
+        return o;
     }
 
     public Product getProduct() {
@@ -58,7 +58,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setOrder(Order order) {
-        this.order = order;
+        this.o = order;
     }
 
     public void setProduct(Product product) {
@@ -81,7 +81,7 @@ public class OrderDetail implements Serializable {
     }
 
     public OrderDetail(Order order, Product product, int quantity, float unitCost, float subTotal) {
-        this.order = order;
+        this.o = order;
         this.product = product;
         this.quantity = quantity;
         this.unitCost = unitCost;
@@ -91,7 +91,7 @@ public class OrderDetail implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (order != null ? order.hashCode() : 0);
+        hash += (o != null ? o.hashCode() : 0);
         return hash;
     }
 
@@ -102,15 +102,12 @@ public class OrderDetail implements Serializable {
             return false;
         }
         OrderDetail other = (OrderDetail) object;
-        if ((this.order == null && other.order != null) || (this.order != null && !this.order.equals(other.order))) {
-            return false;
-        }
-        return true;
+        return !((this.o == null && other.o != null) || (this.o != null && !this.o.equals(other.o)));
     }
 
     @Override
     public String toString() {
-        return "entity.OrderDetail[ id=" + order + " ]";
+        return "entity.OrderDetail[ id=" + o + " ]";
     }
     
 }

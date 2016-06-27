@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">٩(^‿^)۶ Katamiii</a>
+                    <a class="navbar-brand" href="index.html">٩(^‿^)۶ Katamiii</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <span data-bind="text: countCartItems()+' - Items'"></span> <span class="caret"></span></a>
-                            <ul id="shopping-cart" class="dropdown-menu dropdown-cart" data-bind="foreach: lstCartItem()" >
+                            <ul  id="shopping-cart" class="dropdown-menu dropdown-cart" data-bind="foreach: lstCartItem()" >
                                 <li>
                                     <span class="item">
                                         <span class="item-left">
@@ -102,15 +102,16 @@
                                     </form>
                                 </div>
                             </div>
-                            <button type="button" data-bind="click: getResults()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            <button type="button" onclick="gotoPage(2)" data-bind="click: getResults(), value: indexScreen()" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div data-bind="visible: searchResult().length <=0" class="row">
+        <div style="margin-top: 30px;" class="container">
+            <!--List featured product-->
+            <div data-bind="visible: indexScreen()==1" class="row">
                 <div class="row">
                     <div class="col-md-9">
                         <h3>
@@ -143,8 +144,8 @@
                                                 </div>
                                             </div>
                                             <div class="separator clear-left">
-                                                <p class="btn-add">
-                                                    <i class="fa fa-shopping-cart"></i><a href="#" data-bind="click: $root.addToCart" class="hidden-sm">Add to cart</a></p>
+                                                <p  href="#" data-bind="click: $root.addToCart" class="btn-add">
+                                                    <i class="fa fa-shopping-cart"></i><a href="#"  class="hidden-sm">Add to cart</a></p>
                                                 <p class="btn-details">
                                                     <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
                                             </div>
@@ -176,8 +177,8 @@
                                                 </div>
                                             </div>
                                             <div class="separator clear-left">
-                                                <p class="btn-add">
-                                                    <i class="fa fa-shopping-cart"></i><a href="#" data-bind="click: $root.addToCart" class="hidden-sm">Add to cart</a></p>
+                                                <p  href="#" data-bind="click: $root.addToCart" class="btn-add">
+                                                    <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
                                                 <p class="btn-details">
                                                     <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
                                             </div>
@@ -191,8 +192,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div data-bind="visible: searchResult().length > 0"  class="row">
+            </div> <!--end list featured product-->
+            <!-- List searching result -->
+            <div data-bind="visible: indexScreen()==2"  class="row">
                 <div class="well well-sm">
                     <strong>Search result:</strong>
                     <div class="btn-group">
@@ -221,8 +223,8 @@
                                     </div>
                                 </div>
                                 <div class="separator clear-left">
-                                    <p class="btn-add">
-                                        <i class="fa fa-shopping-cart"></i><a href="#" data-bind="click: $root.addToCart" class="hidden-sm">Add to cart</a></p>
+                                    <p href="#" data-bind="click: $root.addToCart" class="btn-add">
+                                        <i  class="fa fa-shopping-cart"></i><a href="#"  class="hidden-sm">Add to cart</a></p>
                                     <p class="btn-details">
                                         <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
                                 </div>
@@ -232,7 +234,81 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- end list result-->
+
+            <!-- shopping cart-->
+            <div  data-bind="visible: indexScreen()==3" class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: lstCartItem()">
+                            <tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a data-bind="text: p().productName" href="#"></a></h4>
+                                            <h5 class="media-heading"> by <a data-bind="text: p().genre.genreName" href="#"></a></h5>
+                                        </div>
+                                    </div></td>
+                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <input type="number" class="form-control" data-bind="value: quantity()" />
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong data-bind="text: p().price"></strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong data-bind="text: total()"></strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>Subtotal</h5></td>
+                                <td class="text-right"><h5><strong data-bind="text: totalAll()"></strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>Estimated shipping</h5></td>
+                                <td class="text-right"><h5><strong>$0</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h3>Total</h3></td>
+                                <td class="text-right"><h3><strong data-bind="text: totalAll()" ></strong></h3></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>
+                                    <button type="button" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                                    </button></td>
+                                <td>
+                                    <button type="button" class="btn btn-success">
+                                        Checkout <span class="glyphicon glyphicon-play"></span>
+                                    </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- end shopping cart-->
 
             <hr>
 
@@ -254,17 +330,22 @@
         <script src="viewmodel/indexViewModel.js"></script>
 
         <script>
-            var ulShoppingCart = document.getElementById('shopping-cart');
-            var liDivider = document.createElement('li');
-            liDivider.className = "divider";
-            var liViewCart = document.createElement('li');
-            var aViewCart = document.createElement('a');
-            aViewCart.className = "text-center";
-            aViewCart.innerHTML = "View Card";
-            aViewCart.href = "#";
-            liViewCart.appendChild(aViewCart);
-            ulShoppingCart.appendChild(liDivider);
-            ulShoppingCart.appendChild(liViewCart);
+                                var ulShoppingCart = document.getElementById('shopping-cart');
+                                var liDivider = document.createElement('li');
+                                liDivider.className = "divider";
+                                var liViewCart = document.createElement('li');
+                                var aViewCart = document.createElement('a');
+                                aViewCart.className = "text-center";
+                                aViewCart.innerHTML = "View Card";
+                                aViewCart.setAttribute("onclick", "gotoPage(3)");
+                                aViewCart.href = "#";
+                                liViewCart.appendChild(aViewCart);
+                                ulShoppingCart.appendChild(liDivider);
+                                ulShoppingCart.appendChild(liViewCart);
+
+                                var gotoPage = function (index) {
+                                    window.vm.indexScreen(index);
+                                }
         </script>
 
 

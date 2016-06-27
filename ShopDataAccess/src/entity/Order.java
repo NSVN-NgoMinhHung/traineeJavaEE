@@ -28,7 +28,6 @@ public class Order implements Serializable {
     @ManyToOne
     private Customer customer;
     private String status;
-    private String shippinged;
     
 
     public Long getId() {
@@ -55,10 +54,6 @@ public class Order implements Serializable {
         return status;
     }
 
-    public String getShippinged() {
-        return shippinged;
-    }
-
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
@@ -75,17 +70,12 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public void setShippinged(String shippinged) {
-        this.shippinged = shippinged;
-    }
-
-    public Order(Long id, String dateCreated, String dateShipped, Customer customer, String status, String shippinged) {
+    public Order(Long id, String dateCreated, String dateShipped, Customer customer, String status) {
         this.id = id;
         this.dateCreated = dateCreated;
         this.dateShipped = dateShipped;
         this.customer = customer;
         this.status = status;
-        this.shippinged = shippinged;
     }
 
     public Order() {

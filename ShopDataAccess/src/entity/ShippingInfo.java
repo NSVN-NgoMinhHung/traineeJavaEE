@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,6 +26,8 @@ public class ShippingInfo implements Serializable {
     private String shippingType;
     private float shippingCost;
     private String shippingLocation;
+    @ManyToOne
+    private Order order;
 
     public Long getId() {
         return id;
@@ -61,12 +64,25 @@ public class ShippingInfo implements Serializable {
     public ShippingInfo() {
     }
 
-    public ShippingInfo(Long id, String shippingType, float shippingCost, String shippingLocation) {
+    public ShippingInfo(Long id, String shippingType, float shippingCost, String shippingLocation, Order order) {
         this.id = id;
         this.shippingType = shippingType;
         this.shippingCost = shippingCost;
         this.shippingLocation = shippingLocation;
+        this.order = order;
     }
+
+    
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+    
+    
 
     @Override
     public int hashCode() {
