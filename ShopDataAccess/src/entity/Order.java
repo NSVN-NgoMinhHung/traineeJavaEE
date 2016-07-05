@@ -70,8 +70,7 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Order(Long id, String dateCreated, String dateShipped, Customer customer, String status) {
-        this.id = id;
+    public Order(String dateCreated, String dateShipped, Customer customer, String status) {
         this.dateCreated = dateCreated;
         this.dateShipped = dateShipped;
         this.customer = customer;
@@ -96,10 +95,7 @@ public class Order implements Serializable {
             return false;
         }
         Order other = (Order) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

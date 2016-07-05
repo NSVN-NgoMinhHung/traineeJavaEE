@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package storeWebService;
+package shopService;
 
-import DataAccess.SearchFacade;
+import BusinessAction.OrderManager;
+import BusinessAction.SearchFacade;
 import com.google.gson.Gson;
+import entity.Order;
 import entity.Product;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -25,18 +27,19 @@ import javax.ws.rs.core.MediaType;
  *
  * @author hungnm
  */
-@Stateless
-@Path("storeWebService")
-public class StoreWebService {
+@Path("shopService")
+public class ShopService {
+
+     BusinessAction.OrderManager om = new OrderManager();
+    BusinessAction.SearchFacade sf = new SearchFacade();
     
-    DataAccess.SearchFacade sf = new SearchFacade();
     @Context
     private UriInfo context;
 
     /**
      * Creates a new instance of StoreWebService
      */
-    public StoreWebService() {
+    public ShopService() {
     }
 
     /**
@@ -110,5 +113,14 @@ public class StoreWebService {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+    
+    @POST
+    @Path("/insertOrder")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void insertOrder(String content) {
+        Gson gson = new Gson();
+        Order o = gson.fromJson(content, new Order().getClass());
+        om.insertOrder(new Order( o.getDateCreated(), o.getDateShipped(), o.getCustomer(), o.getStatus()));
     }
 }

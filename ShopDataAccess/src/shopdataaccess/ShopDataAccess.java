@@ -6,10 +6,13 @@
 package shopdataaccess;
 
 import DataAccess.DataFacade;
-import DataAccess.SearchFacade;
+import BusinessAction.SearchFacade;
 import entity.Administrator;
+import entity.Customer;
 import entity.Genre;
+import entity.Order;
 import entity.Product;
+import entity.ShippingInfo;
 import entity.Users;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -26,24 +29,8 @@ public class ShopDataAccess {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ShopDataAccess da = new ShopDataAccess();
-        DataAccess.DataFacade df = new DataFacade();
-        Object g = df.findObjectById(1, Genre.class);
-        System.out.println(g.toString());
-    }
-
-    public void persist(Object object) {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
+        DataFacade  df = new DataFacade();
+        df.persist(new Customer((Users)df.findObjectById(1, Users.class), "Jason", "Ha Noi", "jason@jason.com", "01234564879", "0123456789", (ShippingInfo)df.findObjectById(51, ShippingInfo.class)));
     }
 
 }

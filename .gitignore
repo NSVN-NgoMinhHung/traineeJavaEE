@@ -2,3 +2,7 @@
 /StoreWebService/build/
 /StoreWebService/dist/
 /ShopDataAccess/dist/
+/DatabaseToCsv/nbproject/private/
+/ShopService/nbproject/private/
+/ShopService/build/
+/ShopService/dist/

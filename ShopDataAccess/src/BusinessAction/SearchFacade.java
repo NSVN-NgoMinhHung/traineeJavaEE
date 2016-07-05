@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataAccess;
+package BusinessAction;
 
+import DataAccess.DataFacade;
 import entity.Genre;
 import entity.Product;
 import java.util.List;

@@ -6,13 +6,9 @@
             <extension file="rest-build.xml" id="rest.5"/>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
-            <name>StoreWebService</name>
+            <name>ShopService</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
-                <library dirs="200">
-                    <file>${file.reference.gson-2.3.1.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
                 <library dirs="200">
                     <file>${file.reference.sqljdbc4-3.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
@@ -21,13 +17,17 @@
                     <file>${reference.ShopDataAccess.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="200">
+                    <file>${file.reference.gson-2.3.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.dir" name="Source Packages"/>
             </source-roots>
             <test-roots>
-                <root id="test.src.dir"/>
+                <root id="test.src.dir" name="Test Packages"/>
             </test-roots>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">

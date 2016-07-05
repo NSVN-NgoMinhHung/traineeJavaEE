@@ -37,15 +37,16 @@ function IndexViewModel() {
     self.searchResult = ko.observableArray();
     self.indexScreen = ko.observable(1);//1-list product 2-search result 3-shoping cart
 
-    $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getListProducts").
-            then(function (getListProducts) {
-                $.each(getListProducts, function () {
-                    self.lstProduct.push(
-                            new Product(this.id, this.productName, this.genre, this.description, this.price, this.imageFileName)
-                            );
+    if (self.indexScreen() === 1) {
+        $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getListProducts").
+                then(function (getListProducts) {
+                    $.each(getListProducts, function () {
+                        self.lstProduct.push(
+                                new Product(this.id, this.productName, this.genre, this.description, this.price, this.imageFileName)
+                                );
+                    });
                 });
-            });
-
+    }
     self.lstCartItem = ko.observableArray();
 
     if (typeof sessionStorage["shoppingCart"] !== "undefined"
@@ -79,14 +80,16 @@ function IndexViewModel() {
 
     self.getResults = function () {
         self.searchResult.removeAll();
-        $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getProductsByName/" + self.searchProductName()).
-                then(function (getProducts) {
-                    $.each(getProducts, function () {
-                        self.searchResult.push(
-                                new Product(this.id, this.productName, this.genre, this.description, this.price, this.imageFileName)
-                                );
+        if (self.indexScreen() === 2) {
+            $.getJSON("http://localhost:8080/StoreWebService/storeWebService/webresources/storeWebService/getProductsByName/" + self.searchProductName()).
+                    then(function (getProducts) {
+                        $.each(getProducts, function () {
+                            self.searchResult.push(
+                                    new Product(this.id, this.productName, this.genre, this.description, this.price, this.imageFileName)
+                                    );
+                        });
                     });
-                });
+        }
     };
 
     //dirty tracking

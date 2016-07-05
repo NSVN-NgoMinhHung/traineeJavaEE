@@ -64,25 +64,12 @@ public class ShippingInfo implements Serializable {
     public ShippingInfo() {
     }
 
-    public ShippingInfo(Long id, String shippingType, float shippingCost, String shippingLocation, Order order) {
-        this.id = id;
+    public ShippingInfo(String shippingType, float shippingCost, String shippingLocation, Order o) {
         this.shippingType = shippingType;
         this.shippingCost = shippingCost;
         this.shippingLocation = shippingLocation;
-        this.order = order;
+        this.order = o;
     }
-
-    
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-    
-    
 
     @Override
     public int hashCode() {

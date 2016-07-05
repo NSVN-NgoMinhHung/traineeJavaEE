@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -28,7 +29,8 @@ public class Customer implements Serializable {
     private String email;
     private String phoneno;
     private String creaditcardInfo;
-    private String shippingInfo;
+    @OneToOne
+    private ShippingInfo shippingInfo;
 
     public Users getId() {
         return user;
@@ -62,7 +64,7 @@ public class Customer implements Serializable {
         return creaditcardInfo;
     }
 
-    public String getShippingInfo() {
+    public ShippingInfo getShippingInfo() {
         return shippingInfo;
     }
 
@@ -90,14 +92,14 @@ public class Customer implements Serializable {
         this.creaditcardInfo = creaditcardInfo;
     }
 
-    public void setShippingInfo(String shippingInfo) {
+    public void setShippingInfo(ShippingInfo shippingInfo) {
         this.shippingInfo = shippingInfo;
     }
 
     public Customer() {
     }
 
-    public Customer(Users user, String customerName, String address, String email, String phoneno, String creaditcardInfo, String shippingInfo) {
+    public Customer(Users user, String customerName, String address, String email, String phoneno, String creaditcardInfo, ShippingInfo shippingInfo) {
         this.user = user;
         this.customerName = customerName;
         this.address = address;

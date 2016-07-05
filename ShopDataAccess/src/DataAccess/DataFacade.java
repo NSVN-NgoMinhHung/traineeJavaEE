@@ -14,9 +14,11 @@ import javax.persistence.EntityManagerFactory;
  */
 public class DataFacade {
 
+    private final EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
+    private final EntityManager em = emf.createEntityManager();
+
     public void persist(Object object) {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
-        EntityManager em = emf.createEntityManager();
+
         em.getTransaction().begin();
         try {
             em.persist(object);
@@ -29,8 +31,6 @@ public class DataFacade {
     }
 
     public Object findObjectById(long id, Class<?> type) {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             Object o = em.find(type, id);
@@ -44,8 +44,6 @@ public class DataFacade {
     }
 
     public void update() {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             em.getTransaction().commit();
@@ -57,8 +55,6 @@ public class DataFacade {
     }
 
     public void delete(Object object) {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("ShopDataAccessPU");
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             em.remove(object);
